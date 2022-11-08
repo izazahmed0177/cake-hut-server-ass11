@@ -30,7 +30,6 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 async function run() {
     try {
-        const serviceCollection = client.db('cakeHut').collection('cakeServices');
 
     } finally {
 

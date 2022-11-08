@@ -21,25 +21,11 @@ app.use(express.json())
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://cakeDBUser:j3COPeGozncuvZsN@cluster0.ygvslal.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-
-// client.connect(err => {
-//     const collection = client.db("test").collection("devices");
-//     // perform actions on the collection object
-//     client.close();
-// });
-
-async function run() {
-    try {
-        const serviceCollection = client.db('cakeHut').collection('cakeServices');
-
-    } finally {
-
-    }
-
-}
-run().catch(console.dir);
-
-
+client.connect(err => {
+    const collection = client.db("test").collection("devices");
+    // perform actions on the collection object
+    client.close();
+});
 
 
 
