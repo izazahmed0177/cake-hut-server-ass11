@@ -18,7 +18,7 @@ app.use(express.json())
 
 
 
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://cakeDBUser:j3COPeGozncuvZsN@cluster0.ygvslal.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
@@ -37,14 +37,7 @@ async function run() {
             const cake = cakeCollection.find(query)
             const cakeservices = await cake.toArray();
             res.send(cakeservices);
-        });
-
-        app.get('/cakeservices/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) }
-            const cakeservice = await cakeCollection.findOne(query);
-            res.send(cakeservice);
-        });
+        })
 
     } finally {
 
