@@ -76,24 +76,20 @@ async function run() {
 
 
 
-        ///----------------------------------
 
 
+        app.get('/allreviews', async (req, res) => {
+            let query = {}
+            if (req.query.cakeservice) {
+                query = {
+                    cakeservice: req.query.cakeservice
+                }
 
-
-
-        // app.get('/allreviews', async (req, res) => {
-        //     let query = {}
-        //     if (req.query.cakeservice) {
-        //         query = {
-        //             cakeservice: req.query.cakeservice
-        //         }
-
-        //     }
-        //     const review = reviewCollection.find(query)
-        //     const allreview = await review.toArray();
-        //     res.send(allreview);
-        // });
+            }
+            const review = reviewCollection.find(query)
+            const allreview = await review.toArray();
+            res.send(allreview);
+        });
 
 
 
@@ -112,22 +108,6 @@ async function run() {
             )
 
             res.send(reviewCake);
-        });
-
-
-
-
-
-        app.get('/allreviewscake/:key', async (req, res) => {
-            console.log(req.params.key)
-
-            const id = req.params.key
-
-            let query = { cakeService: id };
-            // let review = reviewCollection.find(query)
-            let review = reviewCollection.find(query)
-            const allreview = await review.toArray();
-            res.send(allreview);
         });
 
 

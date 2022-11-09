@@ -56,7 +56,7 @@ async function run() {
             res.send(cakeservice);
         });
 
-        // /////-----------------------
+        // /////
 
         app.post('/reviews', async (req, res) => {
             const review = req.body;
@@ -64,36 +64,27 @@ async function run() {
             res.send(result);
 
         })
-        ////-------------------------------------
-
-
-        app.get('/allreviews', async (req, res) => {
-            const query = {}
-            const review = reviewCollection.find(query)
-            const allreview = await review.toArray();
-            res.send(allreview);
-        });
-
-
-
-        ///----------------------------------
-
-
-
 
 
         // app.get('/allreviews', async (req, res) => {
-        //     let query = {}
-        //     if (req.query.cakeservice) {
-        //         query = {
-        //             cakeservice: req.query.cakeservice
-        //         }
-
-        //     }
+        //     const query = {}
         //     const review = reviewCollection.find(query)
         //     const allreview = await review.toArray();
         //     res.send(allreview);
         // });
+
+        app.get('/allreviews', async (req, res) => {
+            let query = {}
+            if (req.query.cakeservice) {
+                query = {
+                    cakeservice: req.query.cakeservice
+                }
+
+            }
+            const review = reviewCollection.find(query)
+            const allreview = await review.toArray();
+            res.send(allreview);
+        });
 
 
 
@@ -112,22 +103,6 @@ async function run() {
             )
 
             res.send(reviewCake);
-        });
-
-
-
-
-
-        app.get('/allreviewscake/:key', async (req, res) => {
-            console.log(req.params.key)
-
-            const id = req.params.key
-
-            let query = { cakeService: id };
-            // let review = reviewCollection.find(query)
-            let review = reviewCollection.find(query)
-            const allreview = await review.toArray();
-            res.send(allreview);
         });
 
 

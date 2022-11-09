@@ -121,6 +121,15 @@ async function run() {
         app.get('/allreviewscake/:key', async (req, res) => {
             console.log(req.params.key)
 
+            // let query = {
+
+            //     "$or": [
+            //         { "name": { $regex: req.params.key } }
+            //     ]
+
+            // }
+            // const review = reviewCollection.find(query)
+
             const id = req.params.key
 
             let query = { cakeService: id };

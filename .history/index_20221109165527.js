@@ -56,7 +56,7 @@ async function run() {
             res.send(cakeservice);
         });
 
-        // /////-----------------------
+        // /////
 
         app.post('/reviews', async (req, res) => {
             const review = req.body;
@@ -64,11 +64,23 @@ async function run() {
             res.send(result);
 
         })
-        ////-------------------------------------
 
+
+        // app.get('/allreviews', async (req, res) => {
+        //     const query = {}
+        //     const review = reviewCollection.find(query)
+        //     const allreview = await review.toArray();
+        //     res.send(allreview);
+        // });
 
         app.get('/allreviews', async (req, res) => {
-            const query = {}
+            let query = {}
+            if (req.query.cakeservice) {
+                query = {
+                    cakeservice: req.query.cakeservice
+                }
+
+            }
             const review = reviewCollection.find(query)
             const allreview = await review.toArray();
             res.send(allreview);
@@ -76,58 +88,27 @@ async function run() {
 
 
 
-        ///----------------------------------
+        app.get('/reviews/:id', async (req, res) => {
 
+            console.log(req.params.id)
 
+            // const id = req.params.id;
+            // let id = req.params.cakeService;
 
+            // const query = {
+            //     cakeService: id
+            // }
+            // const reviewCake = await reviewCollection.find(
+            //     {
+            //         "$or": [
+            //             { name: { $regex: req.params.id } }
+            //         ]
+            //     }
+            // );
 
-
-        // app.get('/allreviews', async (req, res) => {
-        //     let query = {}
-        //     if (req.query.cakeservice) {
-        //         query = {
-        //             cakeservice: req.query.cakeservice
-        //         }
-
-        //     }
-        //     const review = reviewCollection.find(query)
-        //     const allreview = await review.toArray();
-        //     res.send(allreview);
-        // });
-
-
-
-        app.get('/reviews/:key', async (req, res) => {
-
-            console.log(req.params.key)
-
-
-
-            let reviewCake = await reviewCollection.find(
-                {
-                    "$or": [
-                        { "name": { $regex: req.params.key } }
-                    ]
-                }
-            )
+            const reviewCake = await reviewCollection.findById(req.params.id)
 
             res.send(reviewCake);
-        });
-
-
-
-
-
-        app.get('/allreviewscake/:key', async (req, res) => {
-            console.log(req.params.key)
-
-            const id = req.params.key
-
-            let query = { cakeService: id };
-            // let review = reviewCollection.find(query)
-            let review = reviewCollection.find(query)
-            const allreview = await review.toArray();
-            res.send(allreview);
         });
 
 

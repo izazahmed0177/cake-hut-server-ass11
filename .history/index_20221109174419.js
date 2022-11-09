@@ -119,13 +119,20 @@ async function run() {
 
 
         app.get('/allreviewscake/:key', async (req, res) => {
-            console.log(req.params.key)
+            const query = {
 
-            const id = req.params.key
+                "$or": [
+                    { "name": { $regex: req.params.key } }
+                ]
 
-            let query = { cakeService: id };
-            // let review = reviewCollection.find(query)
-            let review = reviewCollection.find(query)
+            }
+            // const review = reviewCollection.find(query)
+            let review = reviewCollection.find(
+
+
+
+
+            )
             const allreview = await review.toArray();
             res.send(allreview);
         });
