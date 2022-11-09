@@ -41,13 +41,6 @@ async function run() {
             res.send(cakeservices);
         });
 
-        app.get('/cakeservicehome', async (req, res) => {
-            const query = {}
-            const cake = cakeCollection.find(query)
-            const cakeservices = await cake.limit(3).toArray();
-            res.send(cakeservices);
-        });
-
 
         app.get('/cakeservices/:id', async (req, res) => {
             const id = req.params.id;
@@ -91,19 +84,13 @@ async function run() {
         app.get('/reviews/:id', async (req, res) => {
 
             // const id = req.params.id;
-            // let id = req.params.cakeService;
+            const id = req.params.cakeService;
 
-            // const query = {
-            //     cakeService: id
-            // }
-            const reviewCake = await reviewCollection.find(
-                {
-                    "$or": [
-                        { name: { $regex: req.params.id } }
-                    ]
-                }
-            );
-            res.send(reviewCake);
+            const query = {
+                cakeService: id
+            }
+            const allreview = await reviewCollection.find(query);
+            res.send(allreview);
         });
 
 
