@@ -97,25 +97,25 @@ async function run() {
 
 
 
-        // app.get('/reviews/:key', async (req, res) => {
+        app.get('/reviews/:key', async (req, res) => {
 
-        //     console.log(req.params.key)
-
-
-
-        //     let reviewCake = await reviewCollection.find(
-        //         {
-        //             "$or": [
-        //                 { "name": { $regex: req.params.key } }
-        //             ]
-        //         }
-        //     )
-
-        //     res.send(reviewCake);
-        // });
+            console.log(req.params.key)
 
 
-        //-----------------------------------------------------------------------------
+
+            let reviewCake = await reviewCollection.find(
+                {
+                    "$or": [
+                        { "name": { $regex: req.params.key } }
+                    ]
+                }
+            )
+
+            res.send(reviewCake);
+        });
+
+
+
 
 
         app.get('/allreviewscake/:key', async (req, res) => {
