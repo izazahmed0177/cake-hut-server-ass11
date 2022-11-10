@@ -88,11 +88,17 @@ async function run() {
 
         app.post('/addcake', verifyJWT, async (req, res) => {
             const cakeData = req.body;
-
             const result = await cakeCollection.insertOne(cakeData);
             res.send(result);
 
         })
+
+
+
+
+
+
+
 
 
         // /////-----------------------
@@ -108,7 +114,7 @@ async function run() {
 
         app.get('/allreviews', async (req, res) => {
             const query = {}
-            const review = reviewCollection.sort('date').find(query)
+            const review = reviewCollection.find(query)
             const allreview = await review.toArray();
             res.send(allreview);
         });
@@ -127,9 +133,8 @@ async function run() {
             const id = req.params.key
 
             let query = { cakeService: id };
-            var mysort = { date: -1 };
             // let review = reviewCollection.find(query)
-            let review = reviewCollection.find(query).sort(mysort)
+            let review = reviewCollection.find(query)
             const allreview = await review.toArray();
             res.send(allreview);
         });

@@ -127,9 +127,8 @@ async function run() {
             const id = req.params.key
 
             let query = { cakeService: id };
-            var mysort = { date: -1 };
             // let review = reviewCollection.find(query)
-            let review = reviewCollection.find(query).sort(mysort)
+            let review = reviewCollection.find(query)
             const allreview = await review.toArray();
             res.send(allreview);
         });
