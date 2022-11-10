@@ -107,7 +107,7 @@ async function run() {
 
 
 
-        app.post('/addcake', verifyJWT, async (req, res) => {
+        app.post('/addcake', async (req, res) => {
             const cakeData = req.body;
             const result = await cakeCollection.insertOne(cakeData);
             res.send(result);
@@ -198,7 +198,7 @@ async function run() {
         });
 
 
-        app.patch('/userreview/:id', verifyJWT, async (req, res) => {
+        app.patch('/userreview/:id', async (req, res) => {
             const id = req.params.id;
             const updateReview = req.body;
             const query = { _id: ObjectId(id) }
@@ -215,7 +215,7 @@ async function run() {
 
 
 
-        app.delete('/userreview/:id', verifyJWT, async (req, res) => {
+        app.delete('/userreview/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) }
             const review = await reviewCollection.deleteOne(query);

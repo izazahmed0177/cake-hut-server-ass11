@@ -107,7 +107,7 @@ async function run() {
 
 
 
-        app.post('/addcake', verifyJWT, async (req, res) => {
+        app.post('/addcake', async (req, res) => {
             const cakeData = req.body;
             const result = await cakeCollection.insertOne(cakeData);
             res.send(result);
@@ -124,7 +124,7 @@ async function run() {
 
         // /////-----------------------
 
-        app.post('/reviews', async (req, res) => {
+        app.post('/reviews', verifyJWT, async (req, res) => {
             const review = req.body;
             const result = await reviewCollection.insertOne(review);
             res.send(result);

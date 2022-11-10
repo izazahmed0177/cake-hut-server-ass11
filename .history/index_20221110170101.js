@@ -107,7 +107,7 @@ async function run() {
 
 
 
-        app.post('/addcake', verifyJWT, async (req, res) => {
+        app.post('/addcake', async (req, res) => {
             const cakeData = req.body;
             const result = await cakeCollection.insertOne(cakeData);
             res.send(result);
@@ -163,21 +163,12 @@ async function run() {
 
 
         app.get('/customer/:key', verifyJWT, async (req, res) => {
-            // console.log(req.params.key)
-            // console.log(req.headers.authorization)
-            const decoded = req.decoded
-            console.log('iiiii', decoded)
+            console.log(req.params.key)
+            console.log(req.headers.authorization)
 
             const id = req.params.key
 
-
-            if (decoded.email !== req.query.email) {
-                res.status(403).send({ message: 'unautharize' })
-            }
-
             let query = { customerId: id };
-
-
             // let review = reviewCollection.find(query)
             let review = reviewCollection.find(query)
             const allreview = await review.toArray();
@@ -198,7 +189,7 @@ async function run() {
         });
 
 
-        app.patch('/userreview/:id', verifyJWT, async (req, res) => {
+        app.patch('/userreview/:id', async (req, res) => {
             const id = req.params.id;
             const updateReview = req.body;
             const query = { _id: ObjectId(id) }
@@ -215,7 +206,7 @@ async function run() {
 
 
 
-        app.delete('/userreview/:id', verifyJWT, async (req, res) => {
+        app.delete('/userreview/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) }
             const review = await reviewCollection.deleteOne(query);
